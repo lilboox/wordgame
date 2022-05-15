@@ -12,7 +12,7 @@ const sample_quote = [
   ["C", 0]
 ];
 
-const remaining_letters = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+const all_letters = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
 class QuoteDisplay extends React.Component {
   props: {
@@ -31,6 +31,10 @@ class QuoteDisplay extends React.Component {
 }
 
 class LetterChoices extends React.Component {
+  props: {
+    letters?: Object;
+  };
+
   letterClick = (text: string) => {
     console.log(text);
   };
@@ -38,8 +42,12 @@ class LetterChoices extends React.Component {
   render() {
     return (
       <ButtonGroup variant="contained">
-        {remaining_letters.map((x) => (
-          <Button onClick={(e) => this.letterClick(x)} name={x}>
+        {Object.keys(this.props.letters).map((x) => (
+          <Button
+            disabled={this.props.letters[!x]} // Why do I need Not?
+            onClick={(e) => this.letterClick(x)}
+            name={x}
+          >
             {x}
           </Button>
         ))}
@@ -48,11 +56,38 @@ class LetterChoices extends React.Component {
   }
 }
 
+class GameModel extends React.Component {
+  props: {
+    quote?: Array<any>;
+    letters_state?: Object;
+  };
+
+  //constructor(props) {
+  //super(props);
+  // state = {
+  //   letters_state: all_letters.map((x) => ({ x: true }));
+  // }
+  //this.props.letters = this.props.quote.bind(this);
+  //}
+
+  state = {
+    letter_done: all_letters.map((x) => ({ x: false }))
+  };
+  // state = { message: "" };
+  // callbackFunction = (childData) => {
+  //       this.setState({message: childData})
+  // },
+
+  render() {
+    return (
+      <Stack spacing={2}>
+        <QuoteDisplay quote={this.props.quote} />
+        <LetterChoices letters={this.state.letter_done} />
+      </Stack>
+    );
+  }
+}
+
 export default function LetterAvatars() {
-  return (
-    <Stack spacing={2}>
-      <QuoteDisplay quote={sample_quote} />
-      <LetterChoices />
-    </Stack>
-  );
+  return <GameModel quote={sample_quote} />;
 }
