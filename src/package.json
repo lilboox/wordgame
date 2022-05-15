@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/material": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest"
+  },
+  "description": "https://github.com/mui/material-ui/blob/v5.7.0/docs/data/material/components/avatars/LetterAvatars.tsx",
+  "devDependencies": {
+    "react-scripts": "latest"
+  },
+  "main": "index.tsx",
+  "name": "LetterAvatars Material Demo",
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "title": "LetterAvatars Material Demo"
+}
