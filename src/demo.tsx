@@ -33,12 +33,7 @@ class QuoteDisplay extends React.Component {
 class LetterPicker extends React.Component {
   props: {
     letters_picked?: Object;
-  };
-
-  // Next Step: move this callback to the parent
-  letterClick = (text: string) => {
-    console.log(this.props.letters_picked[text]);
-    this.props.letters_picked[text] = true; // not re-rendering
+    letterClick?: Function;
   };
 
   render() {
@@ -47,7 +42,7 @@ class LetterPicker extends React.Component {
         {Object.keys(this.props.letters_picked).map((x) => (
           <Button
             disabled={this.props.letters_picked[x]}
-            onClick={(e) => this.letterClick(x)}
+            onClick={(e) => this.props.letterClick(x)}
           >
             {x}
           </Button>
@@ -70,19 +65,37 @@ class GameModel extends React.Component {
   //this.props.letters = this.props.quote.bind(this);
   //}
 
+  // constructor(props) {
+  //   super(props);
+  //   state = all_letters.reduce((o, key) => ({ ...o, [key]: false }), {});
+  // }
+
   state = {
     letters_picked: all_letters.reduce((o, key) => ({ ...o, [key]: false }), {})
   };
+  //state = all_letters.reduce((o, key) => ({ ...o, [key]: false }), {});
+
   // state = { message: "" };
   // callbackFunction = (childData) => {
   //       this.setState({message: childData})
   // },
 
+  letterClick = (text: string) => {
+    console.log(text, this.state.letters_picked[text]);
+    let new_state = this.state.letters_picked;
+    new_state[text] = true;
+    this.setState({ letters_picked: new_state });
+  };
+
   render() {
+    //const { name } = this.state; // instead of passing directly?????
     return (
       <Stack spacing={2}>
         <QuoteDisplay quote={this.props.quote} />
-        <LetterPicker letters_picked={this.state.letters_picked} />
+        <LetterPicker
+          letters_picked={this.state.letters_picked}
+          letterClick={this.letterClick}
+        />
       </Stack>
     );
   }
