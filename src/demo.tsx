@@ -5,17 +5,13 @@ import { deepOrange } from "@mui/material/colors";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 
-const sample_quote = [
-  [" ", 10],
-  ["A", 500],
-  ["B", 500],
-  ["C", 0]
-];
-
+const sample_quote = Array.from("BACK TO THE FUTURE");
 const all_letters = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+const colormap = { false: deepOrange[500], true: "#ffffff" };
 
 class QuoteDisplay extends React.Component {
   props: {
+    letters_picked?: Object;
     quote?: Array<any>;
   };
 
@@ -23,7 +19,14 @@ class QuoteDisplay extends React.Component {
     return (
       <Stack direction="row" spacing={2}>
         {this.props.quote.map((x) => (
-          <Avatar sx={{ bgcolor: deepOrange[x[1]] }}>{x[0]}</Avatar>
+          <Avatar
+            sx={{
+              bgcolor: deepOrange[500],
+              color: colormap[this.props.letters_picked[x]]
+            }}
+          >
+            {x}
+          </Avatar>
         ))}
       </Stack>
     );
@@ -57,28 +60,9 @@ class GameModel extends React.Component {
     quote?: Array<any>;
   };
 
-  //constructor(props) {
-  //super(props);
-  // state = {
-  //   letters_picked: all_letters.map((x) => ({ x: true }));
-  // }
-  //this.props.letters = this.props.quote.bind(this);
-  //}
-
-  // constructor(props) {
-  //   super(props);
-  //   state = all_letters.reduce((o, key) => ({ ...o, [key]: false }), {});
-  // }
-
   state = {
     letters_picked: all_letters.reduce((o, key) => ({ ...o, [key]: false }), {})
   };
-  //state = all_letters.reduce((o, key) => ({ ...o, [key]: false }), {});
-
-  // state = { message: "" };
-  // callbackFunction = (childData) => {
-  //       this.setState({message: childData})
-  // },
 
   letterClick = (text: string) => {
     console.log(text, this.state.letters_picked[text]);
@@ -88,10 +72,12 @@ class GameModel extends React.Component {
   };
 
   render() {
-    //const { name } = this.state; // instead of passing directly?????
     return (
       <Stack spacing={2}>
-        <QuoteDisplay quote={this.props.quote} />
+        <QuoteDisplay
+          letters_picked={this.state.letters_picked}
+          quote={this.props.quote}
+        />
         <LetterPicker
           letters_picked={this.state.letters_picked}
           letterClick={this.letterClick}
