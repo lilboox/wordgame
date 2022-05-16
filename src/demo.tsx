@@ -30,23 +30,24 @@ class QuoteDisplay extends React.Component {
   }
 }
 
-class LetterChoices extends React.Component {
+class LetterPicker extends React.Component {
   props: {
-    letters?: Object;
+    letters_picked?: Object;
   };
 
+  // Next Step: move this callback to the parent
   letterClick = (text: string) => {
-    console.log(text);
+    console.log(this.props.letters_picked[text]);
+    this.props.letters_picked[text] = true; // not re-rendering
   };
 
   render() {
     return (
       <ButtonGroup variant="contained">
-        {Object.keys(this.props.letters).map((x) => (
+        {Object.keys(this.props.letters_picked).map((x) => (
           <Button
-            disabled={this.props.letters[!x]} // Why do I need Not?
+            disabled={this.props.letters_picked[x]}
             onClick={(e) => this.letterClick(x)}
-            name={x}
           >
             {x}
           </Button>
@@ -59,19 +60,18 @@ class LetterChoices extends React.Component {
 class GameModel extends React.Component {
   props: {
     quote?: Array<any>;
-    letters_state?: Object;
   };
 
   //constructor(props) {
   //super(props);
   // state = {
-  //   letters_state: all_letters.map((x) => ({ x: true }));
+  //   letters_picked: all_letters.map((x) => ({ x: true }));
   // }
   //this.props.letters = this.props.quote.bind(this);
   //}
 
   state = {
-    letter_done: all_letters.map((x) => ({ x: false }))
+    letters_picked: all_letters.reduce((o, key) => ({ ...o, [key]: false }), {})
   };
   // state = { message: "" };
   // callbackFunction = (childData) => {
@@ -82,7 +82,7 @@ class GameModel extends React.Component {
     return (
       <Stack spacing={2}>
         <QuoteDisplay quote={this.props.quote} />
-        <LetterChoices letters={this.state.letter_done} />
+        <LetterPicker letters_picked={this.state.letters_picked} />
       </Stack>
     );
   }
