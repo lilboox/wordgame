@@ -34,7 +34,7 @@ class GameModel extends React.Component {
    */
   render() {
     return (
-      <Stack spacing={2}>
+      <Stack spacing={20}>
         <QuoteDisplay
           letters_picked={this.state.letters_picked}
           quote={this.props.quote}
