@@ -13,27 +13,38 @@ const colormap = { false: deepOrange[300], true: "#ffffff" };
 class QuoteDisplay extends React.Component {
   props: {
     letters_picked?: Object;
-    quote?: Array<any>;
+    quote?: String;
   };
 
   /**
-   * TODO: split the quote into multiple rows.
+   *
+   * Credit : https://stackoverflow.com/questions/14484787/wrap-text-in-javascript
    */
+  wrap = (s: String) => s.replace(/(?![^\n]{1,15}$)([^\n]{1,15})\s/g, "$1\n");
+
   render() {
+    /* wrap the quote, and split into array*/
+    let split_array = this.wrap(this.props.quote).split("\n");
+    console.log(split_array);
+
     return (
-      <Stack direction="row" spacing={2}>
-        {this.props.quote.map((x) => (
-          <Avatar
-            sx={{
-              bgcolor: deepOrange[500],
-              color: colormap[this.props.letters_picked[x]],
-              width: 96,
-              height: 96
-            }}
-            variant="square"
-          >
-            {x}
-          </Avatar>
+      <Stack direction="column" spacing={2}>
+        {split_array.map((myrow) => (
+          <Stack direction="row" spacing={2}>
+            {Array.from(myrow).map((x) => (
+              <Avatar
+                sx={{
+                  bgcolor: deepOrange[500],
+                  color: colormap[this.props.letters_picked[x]],
+                  width: 96,
+                  height: 96
+                }}
+                variant="square"
+              >
+                {x}
+              </Avatar>
+            ))}
+          </Stack>
         ))}
       </Stack>
     );

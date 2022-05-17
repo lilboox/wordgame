@@ -3,12 +3,12 @@ import Stack from "@mui/material/Stack";
 import LetterPicker from "./letterpicker";
 import QuoteDisplay from "./quotedisplay";
 
-const sample_quote = Array.from("BACK TO THE FUTURE");
+const sample_quote = "BACK TO THE FUTURE";
 const all_letters = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
 class GameModel extends React.Component {
   props: {
-    quote?: Array<any>;
+    quote?: String;
   };
 
   /** letters_picked is an object mapping each letter to a bool flag.
