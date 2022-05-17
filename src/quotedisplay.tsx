@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import { deepOrange } from "@mui/material/colors";
 
 /* Using a faint 300 during demo, use 500 when real */
-const colormap = { false: deepOrange[300], true: "#ffffff" };
+const colormap = { false: deepOrange[400], true: "#ffffff" };
 
 /** A stack of Avatars dislaying the leters of the quote.
  *  The color of the letter matches the background in the beginning,
@@ -34,11 +34,12 @@ class QuoteDisplay extends React.Component {
             {Array.from(myrow).map((x) => (
               <Avatar
                 sx={{
-                  bgcolor: deepOrange[500],
+                  bgcolor: x === " " ? "#ffffff" : deepOrange[500],
                   color: colormap[this.props.letters_picked[x]],
                   width: 96,
                   height: 96
                 }}
+                style={{ fontSize: "3em" }}
                 variant="square"
               >
                 {x}
