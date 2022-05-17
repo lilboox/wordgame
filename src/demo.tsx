@@ -11,17 +11,27 @@ class GameModel extends React.Component {
     quote?: Array<any>;
   };
 
+  /** letters_picked is an object mapping each letter to a bool flag.
+   * The flag is false when initialized, and is set to true when the letter is picked.
+   */
   state = {
     letters_picked: all_letters.reduce((o, key) => ({ ...o, [key]: false }), {})
   };
 
+  /** Callback when a letter is picked.
+   * This is passed to the child component LetterPicker.
+   */
   letterClick = (text: string) => {
-    console.log(text, this.state.letters_picked[text]);
+    // console.log(text, this.state.letters_picked[text]);
     let new_state = this.state.letters_picked;
     new_state[text] = true;
     this.setState({ letters_picked: new_state });
   };
 
+  /** A vertical stack of two components.
+   * - one to display the quote, revealed incrementally.
+   * - another to guess or pick the letters.
+   */
   render() {
     return (
       <Stack spacing={2}>

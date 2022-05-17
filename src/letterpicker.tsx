@@ -8,6 +8,9 @@ class LetterPicker extends React.Component {
     letterClick?: Function;
   };
 
+  /** A group of buttons, one for each letter.
+   *  The buttons are disabled when clicked/picked.
+   */
   render() {
     return (
       <ButtonGroup variant="contained">
@@ -25,6 +28,3 @@ class LetterPicker extends React.Component {
 }
 
 export default LetterPicker;
-// export default function LetterPicker() {
-//   return <GameModel quote={sample_quote} />;
-// }
