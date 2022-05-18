@@ -25,9 +25,14 @@ class QuoteDisplay extends React.Component {
     console.log(split_array);
 
     return (
-      <Stack direction="column" spacing={10}>
+      <Stack
+        direction="column"
+        spacing={5}
+        justifyContent="center"
+        sx={{ height: 400 }}
+      >
         {split_array.map((myrow) => (
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2} justifyContent="center">
             {Array.from(myrow).map((x) => (
               <Avatar
                 sx={{
