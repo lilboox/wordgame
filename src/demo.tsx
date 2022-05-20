@@ -2,19 +2,38 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import LetterPicker from "./letterpicker";
 import QuoteDisplay from "./quotedisplay";
+import Button from "@mui/material/Button";
 
-const sample_quote = "BACK TO THE FUTURE";
+const all_quotes = [
+  "Pride and Prejudice",
+  "To Kill a Mockingbird",
+  "The Great Gatsby",
+  "One Hundred Years of Solitude",
+  "Crime and Punishment",
+  "The Call of the Wild",
+  "The Lion the Witch and the Wardrobe",
+  "One Flew Over the Cuckoos Nest",
+  "Nineteen Eighty Four",
+  "The Lord of the Rings",
+  "The Adventures of Huckleberry Finn",
+  "Alices Adventures in Wonderland",
+  "Charlie and the Chocolate Factory",
+  "The Count of Monte Cristo",
+  "The Brothers Karamazov",
+  "A Tale of Two Cities",
+  "The Time Machine",
+  "The Art of War"
+];
+
 const all_letters = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
 class GameModel extends React.Component {
-  props: {
-    quote?: String;
-  };
-
-  /** letters_picked is an object mapping each letter to a bool flag.
-   * The flag is false when initialized, and is set to true when the letter is picked.
-   */
   state = {
+    /* The quote in which position in the list of quotes is active in the game? */
+    quote_index: 0,
+    /** letters_picked is an object mapping each letter to a bool flag.
+     * The flag is false when initialized, and is set to true when the letter is picked.
+     */
     letters_picked: all_letters.reduce((o, key) => ({ ...o, [key]: false }), {})
   };
 
@@ -22,10 +41,27 @@ class GameModel extends React.Component {
    * This is passed to the child component LetterPicker.
    */
   letterClick = (text: string) => {
-    // console.log(text, this.state.letters_picked[text]);
     let new_state = this.state.letters_picked;
     new_state[text] = true;
     this.setState({ letters_picked: new_state });
+  };
+
+  /** Callback to set the state of all letters.
+   * true to reveal the quote, and false to hide everything.
+   * Turn the entire letters_picked state to true.
+   */
+  set_all = (x) => {
+    let new_state = all_letters.reduce((o, key) => ({ ...o, [key]: x }), {});
+    this.setState({ letters_picked: new_state });
+  };
+
+  /** Callback to get another quote.
+   * Pick one randomly.
+   */
+  new_quote = () => {
+    let new_idx = Math.floor(Math.random() * all_quotes.length);
+    this.setState({ quote_index: new_idx });
+    this.set_all(false); // reset all the letters picked to false.
   };
 
   /** A vertical stack of two components.
@@ -34,20 +70,36 @@ class GameModel extends React.Component {
    */
   render() {
     return (
-      <Stack spacing={20}>
+      <Stack spacing={10}>
         <QuoteDisplay
           letters_picked={this.state.letters_picked}
-          quote={this.props.quote}
+          quote={all_quotes[this.state.quote_index].toUpperCase()}
         />
         <LetterPicker
           letters_picked={this.state.letters_picked}
           letterClick={this.letterClick}
         />
+        <Stack direction="row" spacing={2} justifyContent="center">
+          <Button
+            variant="outlined"
+            size="large"
+            onClick={(e) => this.set_all(true)}
+          >
+            REVEAL
+          </Button>
+          <Button
+            variant="outlined"
+            size="large"
+            onClick={(e) => this.new_quote()}
+          >
+            NEW
+          </Button>
+        </Stack>
       </Stack>
     );
   }
 }
 
 export default function LetterAvatars() {
-  return <GameModel quote={sample_quote} />;
+  return <GameModel />;
 }

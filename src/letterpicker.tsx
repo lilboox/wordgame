@@ -1,4 +1,5 @@
 import * as React from "react";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 
@@ -13,16 +14,24 @@ class LetterPicker extends React.Component {
    */
   render() {
     return (
-      <ButtonGroup variant="contained">
-        {Object.keys(this.props.letters_picked).map((x) => (
-          <Button
-            disabled={this.props.letters_picked[x]}
-            onClick={(e) => this.props.letterClick(x)}
-          >
-            {x}
-          </Button>
-        ))}
-      </ButtonGroup>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}
+      >
+        <ButtonGroup variant="contained">
+          {Object.keys(this.props.letters_picked).map((x) => (
+            <Button
+              disabled={this.props.letters_picked[x]}
+              onClick={(e) => this.props.letterClick(x)}
+            >
+              {x}
+            </Button>
+          ))}
+        </ButtonGroup>
+      </Box>
     );
   }
 }

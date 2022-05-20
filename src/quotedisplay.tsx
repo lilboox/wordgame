@@ -22,7 +22,6 @@ class QuoteDisplay extends React.Component {
   render() {
     /* wrap the quote, and split into array*/
     let split_array = this.wrap(this.props.quote).split("\n");
-    console.log(split_array);
 
     return (
       <Stack
