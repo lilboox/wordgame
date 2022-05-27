@@ -1,7 +1,7 @@
 import * as React from "react";
 import Stack from "@mui/material/Stack";
-import LetterPicker from "./letterpicker";
-import QuoteDisplay from "./quotedisplay";
+import LetterPicker from "./LetterPicker";
+import QuoteDisplay from "./QuoteDisplay";
 import Button from "@mui/material/Button";
 
 const all_quotes = [
