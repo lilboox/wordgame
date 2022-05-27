@@ -100,6 +100,6 @@ class GameModel extends React.Component {
   }
 }
 
-export default function LetterAvatars() {
+export default function WordGame() {
   return <GameModel />;
 }
