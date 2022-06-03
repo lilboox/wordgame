@@ -1,7 +1,7 @@
 import * as React from "react";
 import Stack from "@mui/material/Stack";
-import LetterPicker from "./LetterPicker";
-import QuoteDisplay from "./QuoteDisplay";
+import LetterPicker from "./LetterPicker.tsx";
+import QuoteDisplay from "./QuoteDisplay.tsx"; // Despite the lint error, vercel doesn't work without the .tsx
 import Button from "@mui/material/Button";
 
 const all_quotes = [
