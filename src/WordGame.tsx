@@ -3,27 +3,7 @@ import Stack from "@mui/material/Stack";
 import LetterPicker from "./LetterPicker.tsx";
 import QuoteDisplay from "./QuoteDisplay.tsx"; // Despite the lint error, vercel doesn't work without the .tsx
 import Button from "@mui/material/Button";
-
-const all_quotes = [
-  "Pride and Prejudice",
-  "To Kill a Mockingbird",
-  "The Great Gatsby",
-  "One Hundred Years of Solitude",
-  "Crime and Punishment",
-  "The Call of the Wild",
-  "The Lion the Witch and the Wardrobe",
-  "One Flew Over the Cuckoos Nest",
-  "Nineteen Eighty Four",
-  "The Lord of the Rings",
-  "The Adventures of Huckleberry Finn",
-  "Alices Adventures in Wonderland",
-  "Charlie and the Chocolate Factory",
-  "The Count of Monte Cristo",
-  "The Brothers Karamazov",
-  "A Tale of Two Cities",
-  "The Time Machine",
-  "The Art of War"
-];
+import all_quotes from "./all_quotes.json";
 
 const all_letters = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
