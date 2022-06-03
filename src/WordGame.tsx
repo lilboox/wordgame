@@ -30,8 +30,11 @@ class GameModel extends React.Component {
    * true to reveal the quote, and false to hide everything.
    * Turn the entire letters_picked state to true.
    */
-  set_all = (x) => {
-    let new_state = all_letters.reduce((o, key) => ({ ...o, [key]: x }), {});
+  set_all = (isPicked: boolean) => {
+    let new_state = all_letters.reduce(
+      (o, key) => ({ ...o, [key]: isPicked }),
+      {}
+    );
     this.setState({ letters_picked: new_state });
   };
 
