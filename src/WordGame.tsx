@@ -47,9 +47,10 @@ class GameModel extends React.Component {
     this.set_all(false); // reset all the letters picked to false.
   };
 
-  /** A vertical stack of two components.
-   * - one to display the quote, revealed incrementally.
-   * - another to guess or pick the letters.
+  /** A vertical stack of three components.
+   * - QuoteDisplay to display the quote, revealed incrementally.
+   * - LetterPicker to guess or pick the letters.
+   * - Buttons to REVEAL quote or start NEW quote
    */
   render() {
     return (

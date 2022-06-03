@@ -3,6 +3,9 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { deepOrange } from "@mui/material/colors";
 
+const BG = "#ffffff";
+const FG = deepOrange[500];
+
 /** A stack of Avatars dislaying the leters of the quote.
  *  The color of the letter matches the background in the beginning,
  *  hence invisible. The color becomes white when picked.
@@ -35,12 +38,10 @@ class QuoteDisplay extends React.Component {
             {Array.from(myrow).map((x) => (
               <Avatar
                 sx={{
-                  bgcolor: x === " " ? "#ffffff" : deepOrange[500], // bg is White for blank
-                  color: this.props.letters_picked[x]
-                    ? "#ffffff"
-                    : deepOrange[500], // fg is white when picked
-                  width: 96,
-                  height: 96
+                  bgcolor: x === " " ? BG : FG, // bg is White for blank
+                  color: this.props.letters_picked[x] ? BG : FG, // fg is white when picked
+                  width: 72,
+                  height: 72
                 }}
                 style={{ fontSize: "3em" }}
                 variant="square"
